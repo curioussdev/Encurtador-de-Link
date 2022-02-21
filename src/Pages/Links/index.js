@@ -3,24 +3,33 @@ import './links.css';
 import { FiArrowLeft, FiLink, FiTrash } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { getLinksSaved } from '../../services/storeLinks';
+import LinkItemModal from '../../components/LinkItemModal';
 
 export default function Links() {
   const [myLinks, setMyLinks] = useState([]);
 
   const [data, setData] = useState({})
-
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   useEffect( () => {
     async function getLinks(){
       const result = await getLinksSaved("@encurtarlink")
 
-      console.log(result)
+      if(result.length ===0 ){
+        //nossa lista está vazia...
+        console.log('LISTA VAZIA')
+      }
+      setMyLinks(result)
 
     }
 
     getLinks();
   }, [])
+
+  function handleOpenLink(link){
+    setData(link);
+    setShowModal(true);
+  }
 
     return(
       <div className="links-container">
@@ -33,18 +42,25 @@ export default function Links() {
           <h1>Meus Links</h1>
         </div>
 
-      <div className='links-item'>
-        <button className='link'>
-        <FiLink size={18} color="#FFF" />
-        https://www.youtube.com/watch?v=vVbHZyHgt7o&t=1653s
-        </button>
-      
-        <button className='link-delete'>
-          <FiTrash size={24} color="#FF5454" />
-        </button>
+      {myLinks.map( link => (
+        <div key={link.id} className='links-item'>
+          <button className='link' onClick={() => handleOpenLink(link)}>
+            <FiLink size={18} color="#FFF" />
+            {link.long_url}
+          </button>
+        
+          <button className='link-delete'>
+            <FiTrash size={24} color="#FF5454" />
+          </button>
       </div>
+      ))}
 
-      
+      {<showModal /> && (
+        <LinkItemModal 
+        closeModal={() => setShowModal(false)}
+        content={data}
+        />
+      )}
 
       </div>
     )
