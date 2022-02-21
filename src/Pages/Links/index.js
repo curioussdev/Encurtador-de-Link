@@ -25,16 +25,7 @@ export default function Links() {
         </button>
       </div>
 
-      <div className='links-item'>
-        <button className='link'>
-        <FiLink size={18} color="#FFF" />
-        https://www.youtube.com/watch?v=vVbHZyHgt7o&t=1653s
-        </button>
       
-        <button className='link-delete'>
-          <FiTrash size={24} color="#FF5454" />
-        </button>
-      </div>
 
       </div>
     )

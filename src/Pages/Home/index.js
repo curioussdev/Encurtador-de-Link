@@ -5,6 +5,7 @@ import Logo from '../../assets/img/logo.png';
 import Menu from '../../components/Menu';
 import LinkItemModal from '../../components/LinkItemModal';
 import api from '../../services/api';
+import { getLinksSaved, saveLinkAtLocalStorage } from '../../services/storeLinks';
 
 
 export default function Home() {
@@ -20,6 +21,9 @@ async function handleShortLink() {
 
       setData(response.data);
       setShowModal(true);
+
+      saveLinkAtLocalStorage('@encurtarlink', response.data)
+
       setLink('');
     }catch{
       alert('ops, parece que algo deu errado')
