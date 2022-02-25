@@ -28,7 +28,7 @@ export default function Links() {
 
   function handleOpenLink(link){
     setData(link);
-    setShowModal(true);
+    setShowModal(false);
   }
 
     return(
@@ -55,9 +55,9 @@ export default function Links() {
       </div>
       ))}
 
-      {<showModal /> && (
+      { showModal  && (
         <LinkItemModal 
-        closeModal={() => setShowModal(false)}
+        closeModal={ ()=> setShowModal(false) }
         content={data}
         />
       )}
