@@ -26,3 +26,6 @@ export async function saveLinkAtLocalStorage(key, newLink){
 
 
 //deletar algum link já salvo
+export function deleteLinks(){
+    
+}
