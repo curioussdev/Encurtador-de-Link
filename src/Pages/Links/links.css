@@ -49,6 +49,12 @@
     border: 0;
     background: transparent;
 }
+.empty-text{
+    width: 100%;
+    text-align: center;
+    margin-top: 28px;
+    color: #FFF;
+}
 
 /*COLOCANOD RESPONSIVIDADE*/
 

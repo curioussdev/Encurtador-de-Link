@@ -26,6 +26,13 @@ export async function saveLinkAtLocalStorage(key, newLink){
 
 
 //deletar algum link já salvo
-export function deleteLinks(){
-    
+export function deleteLink(links, id){
+
+    let myLinks = links.filter( item => {
+        return (item.id !== id)
+    })
+    localStorage.setItem('@encurtarlink', JSON.stringify(myLinks))
+    console.log('link deletado com sucesso')
+
+    return myLinks;
 }

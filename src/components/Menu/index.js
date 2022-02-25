@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function Menu(){
     return(
         <div className='menu'>
-            <a target="_blank" className='social' href='https://github.com/programador-curioso' >
+            <a target="_blank" className='social' href='https://github.com/programador-curioso/Encurtador-de-Link' >
                 <BsGithub size={24} color="#FFF" />
             </a> 
             

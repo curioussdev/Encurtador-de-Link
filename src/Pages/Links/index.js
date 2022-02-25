@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './links.css';
 import { FiArrowLeft, FiLink, FiTrash } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { getLinksSaved } from '../../services/storeLinks';
+import { getLinksSaved, deleteLink } from '../../services/storeLinks';
 import LinkItemModal from '../../components/LinkItemModal';
 
 export default function Links() {
@@ -11,13 +11,15 @@ export default function Links() {
   const [data, setData] = useState({})
   const [showModal, setShowModal] = useState(false);
 
+  const [emptyList, setEmptyList] = useState(false)
+
   useEffect( () => {
     async function getLinks(){
       const result = await getLinksSaved("@encurtarlink")
 
       if(result.length ===0 ){
         //nossa lista está vazia...
-        console.log('LISTA VAZIA')
+        setEmptyList(true)
       }
       setMyLinks(result)
 
@@ -31,8 +33,12 @@ export default function Links() {
     setShowModal(true);
   }
 
-  function handleDelete(id){
-    console.log('você clicou no id ' + id)
+  async function handleDelete(id){
+    const  result = await deleteLink(myLinks, id)
+    if(result.length === 0){
+      setEmptyList(true)
+    }
+    setMyLinks(result);
   }
 
     return(
@@ -45,6 +51,12 @@ export default function Links() {
           
           <h1>Meus Links</h1>
         </div>
+
+        { emptyList && (
+          <div className="links-item">
+            <h2 className="empty-text">Sua lista está vazia</h2>
+          </div>
+        )}
 
       {myLinks.map( link => (
         <div key={link.id} className='links-item'>
