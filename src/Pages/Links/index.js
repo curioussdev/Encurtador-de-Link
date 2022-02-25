@@ -28,7 +28,7 @@ export default function Links() {
 
   function handleOpenLink(link){
     setData(link);
-    setShowModal(false);
+    setShowModal(true);
   }
 
     return(
