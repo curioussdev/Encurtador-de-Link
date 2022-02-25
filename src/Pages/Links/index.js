@@ -31,6 +31,10 @@ export default function Links() {
     setShowModal(true);
   }
 
+  function handleDelete(id){
+    console.log('você clicou no id ' + id)
+  }
+
     return(
       <div className="links-container">
         
@@ -49,7 +53,7 @@ export default function Links() {
             {link.long_url}
           </button>
         
-          <button className='link-delete'>
+          <button className='link-delete' onClick={()=> handleDelete(link.id)}>
             <FiTrash size={24} color="#FF5454" />
           </button>
       </div>
